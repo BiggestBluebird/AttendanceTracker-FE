@@ -1,0 +1,17 @@
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+
+.edit {
+	padding-top: 5px;
+}
+
+.btn-outline-info {
+	font-weight: bold;
+}
+
+.btn-warning {
+	padding-top: 5px;
+}

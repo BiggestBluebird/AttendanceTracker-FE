@@ -1,0 +1,59 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by Driver Alpha Code"
+        [(ngModel)]="title"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" (click)="searchTitle()">Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Events List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let event of events; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveEvent(event, i)"
+      >
+        {{ event.title }}
+      </li>
+    </ul>
+
+    <button class="btn btn-sm btn-danger" (click)="removeAllEvents()">Remove All</button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentEvent?.id">
+      <h4>Event</h4>
+       <div>
+        <label><strong>Driver Alpha:</strong></label> {{ currentEvent?.title }}
+      </div>
+      <div>  
+         <label><strong>Violation:</strong></label>{{ currentEvent?.violation }}
+      </div>
+      <div>  
+         <label><strong>Comments:</strong></label>{{ currentEvent?.description }}
+      </div>
+            <div>  
+         <label><strong>Points Applied:</strong></label>{{ currentEvent?.points }}
+      </div>
+      <div>  
+        <label><strong>Event Status:</strong></label>{{ currentEvent?.published ? "Published" : "Pending" }}
+      </div>  
+
+	<div class=edit>
+     <a class="btn btn-warning" routerLink="/events/{{ currentEvent?.id }}">Edit</a>
+    </div>
+  </div>  
+
+    <div *ngIf="!currentEvent">
+      <br />
+      <p>Select Driver Alpha Code from the Events List</p>
+    </div>
+  </div>
+</div>

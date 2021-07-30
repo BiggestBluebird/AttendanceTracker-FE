@@ -1,0 +1,67 @@
+<div>
+<div *ngIf="currentEvent" class="edit-form">
+    <h4>Event</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Driver Alpha</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentEvent.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="violation">Violation</label>
+        <input
+          type="text"	
+          class="form-control"
+          id="violation"
+          [(ngModel)]="currentEvent.violation"
+          name="violation"
+        />
+      </div>  
+      <div class="form-group">
+        <label for="description">Comments</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentEvent.description"
+          name="description"
+        />
+      </div>
+      <div class="form-group">
+        <label for="points">Points Applied</label>
+        <input
+          type="number"  
+          class="form-control"
+          id="points"
+          [(ngModel)]="currentEvent.points"
+          name="points"
+        />
+      </div> -
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentEvent.published ? "Sent" : "Pending" }}
+      </div>
+    </form>
+		
+    	<button type="button" class="btn btn-primary" *ngIf="currentEvent.published" (click)="updatePublished(false)">Notified</button>
+    	
+    	<button type="button" class="btn btn-primary" *ngIf="!currentEvent.published"  (click)="updatePublished(true)">Confirm</button>
+		
+    	<button type="button" class="btn btn-danger" (click)="deleteEvent()">Delete</button>
+		
+		<button class="btn btn-success" (click)="updateEvent()" type="submit">Update</button>
+          
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentEvent">
+    <br />
+    <p>The Driver Attendance Event is not found...</p>
+  </div>
+</div>
