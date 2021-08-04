@@ -1,0 +1,1 @@
+INSERT INTO events(id, title, violation, description) values (Long, 'BOLM', 'Tardy', 'Comment');
