@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="col-md-6">
-    <h4>Events List</h4>
+    <h4>Event List</h4>
     <ul class="list-group">
       <li
         class="list-group-item"
@@ -33,18 +33,19 @@
        <div>
         <label><strong>Driver Alpha:</strong></label> {{ currentEvent?.title }}
       </div>
+      <div>
+        <label><strong>Date of Event:</strong></label> {{ currentEvent?.date }}
+      </div>
       <div>  
          <label><strong>Violation:</strong></label>{{ currentEvent?.violation }}
       </div>
       <div>  
          <label><strong>Comments:</strong></label>{{ currentEvent?.description }}
       </div>
-            <div>  
+      <div>  
          <label><strong>Points Applied:</strong></label>{{ currentEvent?.points }}
       </div>
-      <div>  
-        <label><strong>Event Status:</strong></label>{{ currentEvent?.published ? "Published" : "Pending" }}
-      </div>  
+ 
 
 	<div class=edit>
      <a class="btn btn-warning" routerLink="/events/{{ currentEvent?.id }}">Edit</a>
@@ -53,7 +54,7 @@
 
     <div *ngIf="!currentEvent">
       <br />
-      <p>Select Driver Alpha Code from the Events List</p>
+      <p>Select Driver Alpha Code</p>
     </div>
   </div>
 </div>

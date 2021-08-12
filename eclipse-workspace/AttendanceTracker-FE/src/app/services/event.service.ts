@@ -12,7 +12,7 @@ export class EventService {
 	
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
+  getAll(): Observable<Event[]> {
     return this.http.get<Event[]>(this.baseUrl);
   }
 
@@ -20,12 +20,13 @@ export class EventService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  create(data: any): Observable<any> {
-    return this.http.post(this.baseUrl, data);
+  create(event: Event): Observable<any> {
+	console.log("service create event", event);
+    return this.http.post(`${this.baseUrl}`, event);
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data);
+  update(id: any, event: Event): Observable<Event> {
+    return this.http.put(`${this.baseUrl}/${id}`, event);
   }
 
   delete(id: any): Observable<any> {

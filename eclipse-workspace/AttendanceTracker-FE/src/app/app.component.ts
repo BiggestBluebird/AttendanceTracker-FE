@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Attendance Tracker';
 
-	KBMlogo2: string = "assets/images/KBMlogo2.jpg";
 }
