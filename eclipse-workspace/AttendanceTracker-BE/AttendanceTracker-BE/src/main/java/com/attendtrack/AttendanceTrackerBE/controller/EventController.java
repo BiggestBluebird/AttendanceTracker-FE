@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.attendtrack.AttendanceTrackerBE.exception.ResourceNotFoundException;
 import com.attendtrack.AttendanceTrackerBE.model.Event;
 import com.attendtrack.AttendanceTrackerBE.repository.EventRepository;
 
@@ -62,8 +63,8 @@ public class EventController {
 	@PostMapping("/events")
 	public ResponseEntity<Event> createEvent(@RequestBody Event event) {
 		try {
-			Event _event = eventRepository.save(
-					new Event(0, event.getTitle(), event.getViolation(), event.getDescription(), event.getPoints()));
+			System.out.println("post mapping" + event);
+			Event _event = eventRepository.save(event);
 			return new ResponseEntity<>(_event, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -71,20 +72,16 @@ public class EventController {
 	}
 
 	@PutMapping("/events/{id}")
-	public ResponseEntity<Event> updateEvent(@PathVariable("id") long id, @RequestBody Event eventDetails) {
+	public ResponseEntity<Event> updateEvent(@PathVariable("id") long id, @RequestBody Event eventDetails)
+			throws ResourceNotFoundException {
+		Event event = eventRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
 
-		Optional<Event> eventData = eventRepository.findById(id);
-
-		if (eventData.isPresent()) {
-			Event _event = eventData.get();
-			_event.setTitle(_event.getTitle());
-			_event.setViolation(_event.getViolation());
-			_event.setDescription(_event.getDescription());
-			_event.setPoints(_event.getPoints());
-			return new ResponseEntity<>(eventRepository.save(_event), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		eventDetails.setTitle(eventDetails.getTitle());
+		eventDetails.setViolation(eventDetails.getViolation());
+		eventDetails.setDescription(eventDetails.getDescription());
+		eventDetails.setPoints(eventDetails.getPoints());
+		return new ResponseEntity<>(eventRepository.save(eventDetails), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/events/{id}")
@@ -105,7 +102,5 @@ public class EventController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
-
 }
