@@ -1,4 +1,36 @@
-.submit-form {
-  max-width: 400px;
-  margin: auto;
+h4	{
+	padding-left: 35%;
+	font-size: 20px;
+	font-weight: bold;	
+	padding-top: 15px;
 }
+
+h5	{
+	padding-left: 1%;
+	font-size: 20px;
+	font-weight: bold;	
+	padding-top: 15px;
+}
+
+p	{
+	font-size: 18px;
+}
+
+form {
+	background-color: lightgrey;
+	width: 100%;
+	height: 100%;
+}
+.policy {
+	border: 5px solid red;
+	padding: 5px;
+	background-color: lightgreen;
+}
+.submit-form {
+  	max-width: 400px;
+  	margin: auto;
+  	padding-top: 15px;
+}
+
+
+
