@@ -10,7 +10,7 @@ import { Event } from 'src/app/models/event.model';
 export class EventsListComponent implements OnInit {
 
   events?: Event[];
-  currentEvent?: Event;
+  currentEvent: any;
   currentIndex = 0;
   title = '';
 
@@ -23,22 +23,22 @@ export class EventsListComponent implements OnInit {
   retrieveEvents(): void {
     this.eventService.getAll()
       .subscribe(
-        data => {
-          this.events = data;
-          console.log(data);
+        event => {
+          this.events = event;
+          console.log(event);
         },
         error => {
           console.log(error);
         });
   }
 
-  refreshList(): void {
+  refreshList() {
     this.retrieveEvents();
-    this.currentEvent = {};
+    this.currentEvent = null;
     this.currentIndex = 0;
   }
 
-  setActiveEvent(event: Event, index: number): void {
+  setActiveEvent(event: any, index: any): void {
     this.currentEvent = event;
     this.currentIndex = index;
   }
