@@ -1,5 +1,20 @@
 body {
 	background-color: lightgrey;
+	font-weight: bold;
+	height: auto;
+}
+
+h3	{
+	font-size: 30px;
+	padding-top: 10px;
+}
+
+h4	{
+	font-size: 18px;	
+}
+
+p	{
+	font-size: 18px;
 }
 
 .footer {
@@ -19,6 +34,8 @@ body {
 .navbar {
 	background-color : rgb(128, 0, 0);
 	width: 100%;
+	font-size: 20px;
+	padding-left: 25px;
 }
 
 .img_styles {
@@ -26,4 +43,6 @@ body {
 	padding-top: 10px;	
 	float: left;
 }
+
+
 
