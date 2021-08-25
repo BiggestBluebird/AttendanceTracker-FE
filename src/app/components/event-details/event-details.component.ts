@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Event } from 'src/app/models/event.model';
+//import { timer } from 'rxjs';
 
 
 @Component({
@@ -10,12 +11,13 @@ import { Event } from 'src/app/models/event.model';
   styleUrls: ['./event-details.component.css']
 })
 export class EventDetailsComponent implements OnInit {
+
   currentEvent: Event = {
    title: '',
+   date: '',	
    violation: '',
    description: '',
-   points: undefined,  
-   published: false
+   points: 1,  
   };
   message = '';
 
@@ -27,10 +29,11 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.message = '';
     this.getEvent(this.route.snapshot.paramMap.get('id'));
-  }   
 
-  getEvent(id): void {
-    this.eventService.get(id).subscribe( data => {
+}
+
+  getEvent(id: any) {
+	this.eventService.get(id).subscribe( data => {
           this.currentEvent = data;
           console.log(data);
         },
@@ -39,37 +42,19 @@ export class EventDetailsComponent implements OnInit {
         });
   }
 
-  updatePublished(status: boolean): void {
-    const data = {
-      title: this.currentEvent.title,
-      description: this.currentEvent.description,
-      published: status
-    };
-
-	this.message = '';
-
-    this.eventService.update(this.currentEvent.id, data).subscribe( response => {
-          this.currentEvent.published = status;
-          console.log(response);
-        },
+  onSubmit() {
+	this.eventService.update(this.currentEvent.id, this.currentEvent)
+		.subscribe( 
+			response => {
+        console.log(response);  
+		this.router.navigate(['/events']);
+	    },
         error => {
           console.log(error);
         });
   }
 
-  updateEvent(): void {
-	this.message = '';
-	
-    this.eventService.update(this.currentEvent.id, this.currentEvent).subscribe( response => {
-          console.log(response);
-          this.message = 'The Driver Attendance Event was updated successfully';
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
-  deleteEvent(): void {
+  deleteEvent() {
 	this.eventService.delete(this.currentEvent.id).subscribe( response => {
           console.log(response);
           this.router.navigate(['/events']);
